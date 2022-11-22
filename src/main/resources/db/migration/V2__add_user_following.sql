@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS "user_followings";
+
 CREATE TABLE "user_followings" (
 follower_user_id BIGINT REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
 followed_user_id BIGINT REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,

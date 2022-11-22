@@ -1,6 +1,8 @@
 package org.ppke.itk.listen.domain.user.data;
 
 import org.ppke.itk.listen.domain.BaseEntity;
+import org.ppke.itk.listen.domain.usertrack.data.UserTrack;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,11 +35,12 @@ public class User extends BaseEntity {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    //Owned UserTraccks
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="ownerUser")
+    private List<UserTrack> userTracks;
 
     //Favorited UserTracks
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "user_followings", 
         joinColumns = @JoinColumn(name = "follower_user_id"), 
@@ -46,7 +49,7 @@ public class User extends BaseEntity {
     @JsonIgnore
     private List<User> followedUsers = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "followedUsers")
+    @ManyToMany(mappedBy = "followedUsers", fetch = FetchType.LAZY)
     @Builder.Default
     @JsonIgnore
     private List<User> followerUsers = new ArrayList<>();
