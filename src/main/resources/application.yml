@@ -1,0 +1,15 @@
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+                
+    endpoint:
+        loggers:
+            enabled: true
+
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:49153/postgres
+        username: postgres
+        password: postgrespw
