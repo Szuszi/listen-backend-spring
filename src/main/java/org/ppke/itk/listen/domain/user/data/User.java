@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Getter
@@ -32,8 +37,18 @@ public class User extends BaseEntity {
 
     //Favorited UserTracks
 
-    //Followed Users
+    @ManyToMany
+    @JoinTable(
+        name = "user_followings", 
+        joinColumns = @JoinColumn(name = "follower_user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
+    @Builder.Default
+    @JsonIgnore
+    private List<User> followedUsers = new ArrayList<>();
 
-    //Followers
+    @ManyToMany(mappedBy = "followedUsers")
+    @Builder.Default
+    @JsonIgnore
+    private List<User> followerUsers = new ArrayList<>();
 }
 

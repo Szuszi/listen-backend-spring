@@ -37,4 +37,24 @@ public class UserController {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
     }
+
+    @GetMapping(value ="/{id}/followers", produces = "application/json")
+    public List<User> getUserFollowers(@PathVariable("id") Long id) {
+        log.info("Calling GET /users/{id}/followers endpoint.");
+
+        User foundUser = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
+
+        return foundUser.getFollowerUsers();
+    }
+
+    @GetMapping(value ="/{id}/following", produces = "application/json")
+    public List<User> getUserFollowing(@PathVariable("id") Long id) {
+        log.info("Calling GET /users/{id}/following endpoint.");
+
+        User foundUser = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
+
+        return foundUser.getFollowedUsers();
+    }
 }
