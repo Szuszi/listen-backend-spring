@@ -2,7 +2,6 @@ package org.ppke.itk.listen.controller;
 
 import org.ppke.itk.listen.domain.user.data.User;
 import org.ppke.itk.listen.domain.user.repository.UserRepository;
-import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

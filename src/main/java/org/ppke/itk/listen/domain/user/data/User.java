@@ -35,7 +35,8 @@ public class User extends BaseEntity {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy ="ownerUser")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="ownerUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UserTrack> userTracks;
 
     //Favorited UserTracks
