@@ -11,11 +11,9 @@ import java.util.Date;
 public class BaseEntity {
 
     @Column(name = "created_on")
-    @JsonIgnore
     private Date createdOn;
 
     @Column(name = "last_modified_on")
-    @JsonIgnore
     private Date modifiedOn;
 
     @PrePersist
