@@ -12,13 +12,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     Optional<User> findById(Long id);
-
-    /* 
-    public List<User> getTeams() {
-        return List.of(
-            new User(0, "Marco Polo", "One of the greatest adventurer of our world", "https://www.worldometers.info/img/flags/br-flag.gif"),
-            new User(1, "Colombus Christoph", "India is so nice", "https://www.worldometers.info/img/flags/br-flag.gif")
-        );
-    }
-    */
 }
