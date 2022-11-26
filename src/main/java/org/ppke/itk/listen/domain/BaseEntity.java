@@ -1,6 +1,5 @@
 package org.ppke.itk.listen.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;

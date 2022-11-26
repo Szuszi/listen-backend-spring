@@ -1,5 +1,6 @@
 package org.ppke.itk.listen.controller;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.ppke.itk.listen.domain.user.data.User;
@@ -29,11 +30,20 @@ public class UserTrackController {
     private final UserRepository userRepository;
 
     @GetMapping(value ="/{id}", produces = "application/json")
-    public UserTrack getTeamById(@PathVariable("id") Long id) {
+    public UserTrack getTrackById(@PathVariable("id") Long id) {
         log.info("Calling GET /user-tracks/{id} endpoint.");
 
         return userTrackRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + UserTrack.class.getSimpleName() + " with the id: " + id));
+    }
+
+    @GetMapping(value ="/newest", produces = "application/json")
+    public List<UserTrack> getNewestTracks() {
+        log.info("Calling GET /user-tracks/newest endpoint.");
+
+        return userTrackRepository.findAll().subList(0, 10);
+
+        // TODO: List tracks sorted by createdAt attribute + add limit & pagination logic
     }
 
     @PostMapping
@@ -56,7 +66,7 @@ public class UserTrackController {
     }
 
     @PutMapping(value ="/{id}")
-    public UserTrack updateUserTrack(@RequestBody NewUserTrack userTrack, @PathVariable("id") Long id) {
+    public UserTrack updateTrack(@RequestBody NewUserTrack userTrack, @PathVariable("id") Long id) {
         log.info("Calling PUT /user-tracks/{id} endpoint.");
 
         UserTrack trackToUpdate = userTrackRepository.findById(id)
