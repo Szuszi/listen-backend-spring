@@ -1,20 +1,35 @@
 package org.ppke.itk.listen.domain.usertrack.data;
 
 import org.ppke.itk.listen.domain.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-// import lombok.EqualsAndHashCode;
+import org.ppke.itk.listen.domain.user.data.User;
 
-@Data
-// @EqualsAndHashCode(callSuper=false)
+import javax.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name ="user_tracks")
 public class UserTrack extends BaseEntity {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+
+    @Column(name = "picture_url")
     private String pictureUrl;
+
+    @Column(name = "audio_url")
     private String audioUrl;
 
-    //owner userId
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="owner_user_id")
+    private User ownerUser;
 
     //Favorites 
 }
