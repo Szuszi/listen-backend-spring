@@ -69,9 +69,11 @@ public class UserTrackController {
 
     @DeleteMapping(value ="/{id}")
     public void deleteTrack(@PathVariable("id") Long id) {
-        userTrackRepository.deleteById(id);
+        UserTrack trackToDelete = userTrackRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Could not find " + UserTrack.class.getSimpleName() + " with the id: " + id));
 
-        // TODO: Handle not found (It's 500 now)
+        userTrackRepository.delete(trackToDelete);
+        
         // TODO: Only allow track delete for authenticated user for their ids
     }
 }
