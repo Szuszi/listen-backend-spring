@@ -2,6 +2,7 @@ package org.ppke.itk.listen.controller;
 
 import org.ppke.itk.listen.domain.user.data.User;
 import org.ppke.itk.listen.domain.user.repository.UserRepository;
+import org.ppke.itk.listen.domain.usertrack.data.UserTrack;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,5 +56,15 @@ public class UserController {
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
 
         return foundUser.getFollowedUsers();
+    }
+
+    @GetMapping(value ="/{id}/tracks", produces = "application/json")
+    public List<UserTrack> getUserTracks(@PathVariable("id") Long id) {
+        log.info("Calling GET /users/{id}/tracks endpoint.");
+
+        User foundUser = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
+
+        return foundUser.getUserTracks();
     }
 }
