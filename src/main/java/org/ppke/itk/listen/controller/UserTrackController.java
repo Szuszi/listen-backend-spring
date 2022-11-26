@@ -38,6 +38,8 @@ public class UserTrackController {
 
     @PostMapping
     public UserTrack saveNewTrack(@RequestBody NewUserTrack userTrack) {
+        log.info("Calling POST /user-tracks endpoint.");
+
         User ownerUser = userRepository.findById(userTrack.getOwnerUserId())
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + userTrack.getOwnerUserId()));
 
@@ -55,6 +57,8 @@ public class UserTrackController {
 
     @PutMapping(value ="/{id}")
     public UserTrack updateUserTrack(@RequestBody NewUserTrack userTrack, @PathVariable("id") Long id) {
+        log.info("Calling PUT /user-tracks/{id} endpoint.");
+
         UserTrack trackToUpdate = userTrackRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + UserTrack.class.getSimpleName() + " with the id: " + id));
 
@@ -69,6 +73,8 @@ public class UserTrackController {
 
     @DeleteMapping(value ="/{id}")
     public void deleteTrack(@PathVariable("id") Long id) {
+        log.info("Calling DELETE /user-tracks/{id} endpoint.");
+
         UserTrack trackToDelete = userTrackRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + UserTrack.class.getSimpleName() + " with the id: " + id));
 
