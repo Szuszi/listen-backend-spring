@@ -32,6 +32,12 @@ public class User extends BaseEntity {
     private String name;
     private String description;
 
+    @JsonIgnore
+    private String password;
+
+    @JsonIgnore
+    private String role;
+
     @Column(name = "avatar_url")
     private String avatarUrl;
 
