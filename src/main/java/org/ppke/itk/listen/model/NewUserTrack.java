@@ -8,5 +8,4 @@ public class NewUserTrack {
     private String name;
     private String pictureUrl;
     private String audioUrl;
-    private Long ownerUserId;
 }

@@ -35,8 +35,9 @@ public class WebSecurityConfiguration {
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-                http.headers().frameOptions().disable();
-                return http.build();
+        http.headers().frameOptions().disable();
+
+        return http.build();
     }
 
     @Bean

@@ -31,11 +31,19 @@ public class UserController {
     }
 
     @GetMapping(value ="/{id}", produces = "application/json")
-    public User getTeamById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") Long id) {
         log.info("Calling GET /users/{id} endpoint.");
 
         return userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the id: " + id));
+    }
+
+    @GetMapping(value ="/name/{name}", produces = "application/json")
+    public User getUserByUserName(@PathVariable("name") String name) {
+        log.info("Calling GET /users/name/{name} endpoint.");
+
+        return userRepository.findByName(name)
+                .orElseThrow(() -> new NoSuchElementException("Could not find " + User.class.getSimpleName() + " with the name: " + name));
     }
 
     @GetMapping(value ="/{id}/followers", produces = "application/json")
