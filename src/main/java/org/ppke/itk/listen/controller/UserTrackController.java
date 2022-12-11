@@ -44,7 +44,7 @@ public class UserTrackController {
     public List<UserTrack> getNewestTracks() {
         log.info("Calling GET /user-tracks/newest endpoint.");
 
-        List<UserTrack> tracks = userTrackRepository.findAll().subList(0, 10);
+        List<UserTrack> tracks = userTrackRepository.findAll();
 
         if (tracks.size() > 10) return tracks.subList(0, 10);
 
