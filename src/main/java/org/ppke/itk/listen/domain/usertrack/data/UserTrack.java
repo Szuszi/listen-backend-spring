@@ -3,6 +3,8 @@ package org.ppke.itk.listen.domain.usertrack.data;
 import org.ppke.itk.listen.domain.BaseEntity;
 import org.ppke.itk.listen.domain.user.data.User;
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -31,5 +33,10 @@ public class UserTrack extends BaseEntity {
     @JoinColumn(name ="owner_user_id")
     private User ownerUser;
 
-    //Favorites 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "track_favorites", 
+        joinColumns = @JoinColumn(name = "favorited_user_track_id"), 
+        inverseJoinColumns = @JoinColumn(name = "favorites_user_id"))
+    private List<User> userFavorites;
 }

@@ -44,10 +44,13 @@ public class UserTrackController {
     public List<UserTrack> getNewestTracks() {
         log.info("Calling GET /user-tracks/newest endpoint.");
 
-        return userTrackRepository.findAll().subList(0, 10);
+        List<UserTrack> tracks = userTrackRepository.findAll().subList(0, 10);
+
+        if (tracks.size() > 10) return tracks.subList(0, 10);
+
+        return tracks;
 
         // TODO: List tracks sorted by createdAt attribute + add limit & pagination logic
-        // TODO: Fails if list return elements with lower size than 10
     }
 
     @PostMapping

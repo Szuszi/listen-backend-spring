@@ -45,7 +45,9 @@ public class User extends BaseEntity {
     @JsonIgnore
     private List<UserTrack> userTracks;
 
-    //Favorited UserTracks
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy ="userFavorites", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<UserTrack> favoritedTracks;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
